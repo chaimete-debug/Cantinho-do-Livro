@@ -8,7 +8,7 @@
 
 // 🔧 Substitui pelo URL da tua Web App do Google Apps Script
 // (Implementar → Nova implementação → Aplicação Web → copiar URL)
-const API_URL = 'COLOCA_AQUI_O_URL_DA_TUA_WEB_APP';
+const API_URL = 'https://script.google.com/macros/s/AKfycbwiliv9zFjJ3SkHeSikaQ82LKlBxHRHt-rdkgpnEx1TFGHR8jNQH0QvmFE5iHHaAWBl/exec';
 
 /**
  * Chama o backend para leituras (GET).
