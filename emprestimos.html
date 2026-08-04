@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca — Empréstimos</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <nav class="sidebar">
+    <div class="sidebar__brand">Biblioteca <span>v1.0</span></div>
+    <ul class="sidebar__nav">
+      <li><a href="index.html">Painel</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="emprestimos.html">Empréstimos</a></li>
+      <li><a href="utilizadores.html">Utilizadores</a></li>
+      <li><a href="relatorios.html">Relatórios</a></li>
+    </ul>
+  </nav>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <h1>Empréstimos</h1>
+        <p>Regista requisições e devoluções de livros.</p>
+      </div>
+      <button class="btn" id="btn-mostrar-form">+ Novo empréstimo</button>
+    </div>
+
+    <div id="mensagem"></div>
+
+    <div class="card" id="form-emprestimo-card" style="display:none;">
+      <h2>Registar empréstimo</h2>
+      <form id="form-emprestimo">
+        <div class="form-row">
+          <div class="field">
+            <label for="emp-livro">Livro *</label>
+            <select id="emp-livro" required></select>
+          </div>
+          <div class="field">
+            <label for="emp-utilizador">Utilizador *</label>
+            <select id="emp-utilizador" required></select>
+          </div>
+        </div>
+        <div class="toolbar">
+          <button type="submit" class="btn">Confirmar empréstimo</button>
+          <button type="button" class="btn secundario" id="btn-cancelar-form">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn secundario pequeno active-filter" data-filtro="ativos" id="btn-filtro-ativos">Ativos</button>
+      <button class="btn secundario pequeno" data-filtro="atrasados" id="btn-filtro-atrasados">Atrasados</button>
+    </div>
+
+    <div id="lista-emprestimos">
+      <p class="loading">A carregar…</p>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/emprestimos.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca — Painel</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <nav class="sidebar">
+    <div class="sidebar__brand">Biblioteca <span>v1.0</span></div>
+    <ul class="sidebar__nav">
+      <li><a href="index.html">Painel</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="emprestimos.html">Empréstimos</a></li>
+      <li><a href="utilizadores.html">Utilizadores</a></li>
+      <li><a href="relatorios.html">Relatórios</a></li>
+    </ul>
+  </nav>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <h1>Painel Geral</h1>
+        <p>Estado atual da biblioteca, num relance.</p>
+      </div>
+    </div>
+
+    <div id="mensagem"></div>
+    <div id="stats" class="stat-grid">
+      <p class="loading">A carregar estatísticas…</p>
+    </div>
+
+    <div class="card">
+      <h2>Empréstimos atrasados</h2>
+      <div id="atrasados-lista">
+        <p class="loading">A carregar…</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
