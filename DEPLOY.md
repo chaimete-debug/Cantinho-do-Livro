@@ -71,6 +71,17 @@ E abrir `http://localhost:8000`.
 (usa `Content-Type: text/plain` nos pedidos POST). Se mesmo assim tiveres erros de CORS,
 confirma que a implementação do GAS está configurada com "Quem tem acesso: Qualquer pessoa".
 
+## PWA — instalação como aplicação
+O sistema já está configurado como PWA (Progressive Web App):
+- `manifest.json` define nome, cores e ícones da aplicação.
+- `sw.js` (service worker) faz cache dos ficheiros estáticos para abertura rápida e uso offline — os dados da biblioteca (livros, empréstimos) continuam sempre a vir da rede, nunca do cache.
+- `js/pwa.js` regista o service worker e mostra um botão **"Instalar aplicação"** na barra lateral sempre que o navegador permitir a instalação.
+- Ícones em `icons/` (192px, 512px, 180px para iOS, 32px para favicon).
+
+**Importante:** PWAs só funcionam em **HTTPS** (ou `localhost`) — não funciona corretamente ao abrir os ficheiros diretamente do disco (`file://`). O Vercel já serve tudo em HTTPS por defeito, por isso após o deploy o botão de instalar deve aparecer automaticamente no Chrome/Edge/Android. No iOS (Safari), a instalação faz-se manualmente: Partilhar → "Adicionar ao ecrã principal".
+
+Se quiseres trocar o ícone, corre `python3 gerar_icones.py` depois de ajustar as cores no início do ficheiro, ou substitui os PNGs em `icons/` diretamente.
+
 ## Notas de design
 - O **carimbo circular tracejado** nos empréstimos (ativo/atrasado/devolvido) é o elemento
   visual de assinatura do sistema — inspirado nos carimbos de data de devolução das

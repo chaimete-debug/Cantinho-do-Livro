@@ -284,6 +284,26 @@ tr:hover td { background: rgba(176, 141, 87, 0.06); }
 
 .loading { color: var(--color-ink-soft); font-style: italic; }
 
+/* ---------- Instalação PWA ---------- */
+.btn-instalar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius);
+  border: 1px dashed var(--color-brass);
+  background: transparent;
+  color: var(--color-brass-soft);
+  cursor: pointer;
+}
+.btn-instalar:hover { background: rgba(176, 141, 87, 0.12); }
+.btn-instalar__icone { color: var(--color-brass); }
+
 @media (max-width: 780px) {
   .app-shell { flex-direction: column; }
   .sidebar { width: 100%; padding: var(--space-md); }
