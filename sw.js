@@ -15,16 +15,16 @@ const FICHEIROS_ESTATICOS = [
   'utilizadores.html',
   'relatorios.html',
   'manifest.json',
-  'css/style.css',
-  'js/api.js',
-  'js/dashboard.js',
-  'js/catalogo.js',
-  'js/emprestimos.js',
-  'js/utilizadores.js',
-  'js/relatorios.js',
-  'js/pwa.js',
-  'icons/icon-192.png',
-  'icons/icon-512.png'
+  'style.css',
+  'api.js',
+  'dashboard.js',
+  'catalogo.js',
+  'emprestimos.js',
+  'utilizadores.js',
+  'relatorios.js',
+  'pwa.js',
+  'icon-192.png',
+  'icon-512.png'
 ];
 
 self.addEventListener('install', evento => {
