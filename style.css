@@ -306,6 +306,48 @@ tr:hover td { background: rgba(176, 141, 87, 0.06); }
 
 @media (max-width: 780px) {
   .app-shell { flex-direction: column; }
-  .sidebar { width: 100%; padding: var(--space-md); }
+
+  .sidebar {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+
+  .sidebar__brand {
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    width: 100%;
+  }
+
+  .sidebar__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    flex: 1;
+  }
+  .sidebar__nav li { margin-bottom: 0; }
+  .sidebar__nav a {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.85rem;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    border-radius: var(--radius);
+  }
+  .sidebar__nav a.active { border-bottom-color: var(--color-brass); }
+
+  /* O botão de instalar PWA fica também na linha horizontal, não empilhado */
+  .sidebar__nav li:has(.btn-instalar) {
+    width: auto;
+    margin-top: 0;
+  }
+  .btn-instalar {
+    width: auto;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.78rem;
+  }
+
   .main { padding: var(--space-md); }
 }
