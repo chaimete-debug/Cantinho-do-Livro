@@ -31,9 +31,22 @@
         <p>Pesquisa, adiciona e gere os livros da biblioteca.</p>
       </div>
       <button class="btn" id="btn-mostrar-form">+ Novo livro</button>
+      <button class="btn secundario" id="btn-scan">📷 Digitalizar ISBN</button>
     </div>
 
     <div id="mensagem"></div>
+
+    <div class="card" id="scanner-card" style="display:none;">
+      <h2>Digitalizar código de barras</h2>
+      <p style="color:var(--color-ink-soft); font-size:0.88rem; margin-top:-0.4rem;">
+        Aponta a câmara ao código de barras (ISBN) na contracapa do livro.
+      </p>
+      <div id="leitor-scanner" class="scanner-viewport"></div>
+      <div id="scanner-estado" class="msg info" style="display:none;"></div>
+      <div class="toolbar">
+        <button type="button" class="btn secundario" id="btn-cancelar-scan">Cancelar</button>
+      </div>
+    </div>
 
     <div class="card" id="form-livro-card" style="display:none;">
       <h2 id="form-titulo">Adicionar livro</h2>
@@ -91,8 +104,10 @@
   </main>
 </div>
 
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <script src="api.js"></script>
 <script src="pwa.js"></script>
+<script src="scanner.js"></script>
 <script src="catalogo.js"></script>
 </body>
 </html>

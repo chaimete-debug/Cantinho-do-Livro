@@ -304,6 +304,19 @@ tr:hover td { background: rgba(176, 141, 87, 0.06); }
 .btn-instalar:hover { background: rgba(176, 141, 87, 0.12); }
 .btn-instalar__icone { color: var(--color-brass); }
 
+/* ---------- Scanner de código de barras ---------- */
+.scanner-viewport {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto var(--space-md);
+  border: 2px dashed var(--color-brass);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  min-height: 260px;
+}
+.scanner-viewport video { border-radius: var(--radius); }
+
 @media (max-width: 780px) {
   .app-shell { flex-direction: column; }
 

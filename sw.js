@@ -19,6 +19,7 @@ const FICHEIROS_ESTATICOS = [
   'api.js',
   'dashboard.js',
   'catalogo.js',
+  'scanner.js',
   'emprestimos.js',
   'utilizadores.js',
   'relatorios.js',
@@ -46,9 +47,14 @@ self.addEventListener('activate', evento => {
 self.addEventListener('fetch', evento => {
   const url = new URL(evento.request.url);
 
-  // Nunca fazer cache de pedidos ao backend (Google Apps Script) —
-  // os dados da biblioteca têm de vir sempre atualizados da rede.
-  if (url.hostname.includes('script.google.com')) {
+  // Nunca fazer cache de pedidos ao backend (Google Apps Script) ou a
+  // serviços externos (CDN do scanner, Google Books) — devem ir sempre
+  // diretamente à rede.
+  if (
+    url.hostname.includes('script.google.com') ||
+    url.hostname.includes('unpkg.com') ||
+    url.hostname.includes('googleapis.com')
+  ) {
     return; // deixa passar diretamente para a rede
   }
 
