@@ -86,20 +86,68 @@ async function processarCodigoDetetado(isbn) {
 /**
  * Consulta a Google Books API (pública, sem chave necessária) para
  * obter título e autor a partir do ISBN digitalizado.
+ * Se não encontrar nada, tenta a Open Library como alternativa —
+ * costuma ter melhor cobertura para livros fora do mercado anglófono.
  */
 async function procurarLivroPorIsbn(isbn) {
-  const url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + encodeURIComponent(isbn);
-  const resposta = await fetch(url);
-  if (!resposta.ok) throw new Error('Falha ao consultar base de dados de livros');
+  const viaGoogleBooks = await procurarNoGoogleBooks(isbn);
+  if (viaGoogleBooks) return viaGoogleBooks;
 
-  const dados = await resposta.json();
-  if (!dados.items || dados.items.length === 0) return null;
+  const viaOpenLibrary = await procurarNaOpenLibrary(isbn);
+  if (viaOpenLibrary) return viaOpenLibrary;
 
-  const volume = dados.items[0].volumeInfo;
-  return {
-    titulo: volume.title || '',
-    autor: (volume.authors || []).join(', ')
-  };
+  return null;
+}
+
+/* 🔧 Chave de API gratuita do Google Books (opcional, mas recomendada —
+   sem chave, o Google Books bloqueia pedidos anónimos com erro 429).
+   Obter em: console.cloud.google.com → ativar "Books API" → Credenciais
+   → Criar credenciais → Chave de API. Deixa vazio ('') para saltar o
+   Google Books e usar só o Open Library. */
+const GOOGLE_BOOKS_API_KEY = 'COLOCA_AQUI_A_TUA_CHAVE_OU_DEIXA_VAZIO';
+
+async function procurarNoGoogleBooks(isbn) {
+  if (!GOOGLE_BOOKS_API_KEY) return null; // sem chave configurada, salta esta fonte
+
+  try {
+    const url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' +
+      encodeURIComponent(isbn) + '&key=' + encodeURIComponent(GOOGLE_BOOKS_API_KEY);
+    const resposta = await fetch(url);
+    if (!resposta.ok) return null;
+
+    const dados = await resposta.json();
+    if (!dados.items || dados.items.length === 0) return null;
+
+    const volume = dados.items[0].volumeInfo;
+    if (!volume.title) return null;
+
+    return {
+      titulo: volume.title,
+      autor: (volume.authors || []).join(', ')
+    };
+  } catch (err) {
+    return null; // falha silenciosa — tenta a fonte seguinte
+  }
+}
+
+async function procurarNaOpenLibrary(isbn) {
+  try {
+    const url = 'https://openlibrary.org/api/books?bibkeys=ISBN:' + encodeURIComponent(isbn) + '&format=json&jscmd=data';
+    const resposta = await fetch(url);
+    if (!resposta.ok) return null;
+
+    const dados = await resposta.json();
+    const chave = 'ISBN:' + isbn;
+    const livro = dados[chave];
+    if (!livro || !livro.title) return null;
+
+    return {
+      titulo: livro.title,
+      autor: (livro.authors || []).map(a => a.name).join(', ')
+    };
+  } catch (err) {
+    return null;
+  }
 }
 
 function mostrarEstadoScanner(texto, tipo = 'info') {
